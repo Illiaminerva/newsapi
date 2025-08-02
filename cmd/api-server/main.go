@@ -11,7 +11,7 @@ import (
 
 func main() {
 	log := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{AddSource: true}))
-	r := router.New()
+	r := router.New(nil)
 	wrappedRouter := logger.AddLoggerMid(log, logger.LoggerMid(r))
 	log.Info("server starting on port 8080")
 	if err := http.ListenAndServe(":8080", wrappedRouter); err != nil {
